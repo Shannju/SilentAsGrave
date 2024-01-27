@@ -13,35 +13,38 @@ public class massageGreen_Short : MonoBehaviour
     public GameObject WxmassageGreen_Short;
     public float GenerateInterval = 10.0f;
 
-    public int healthMassageGreenShort = 6;
     private Animator animator;
+
+    public int healthMassageGreenShort = 6;
     private bool KeyDown = false;
 
     public float moveDuration = 1.0f; // 协程中，平滑移动的距离。值越小，移动越快。
     [SerializeField] private Collider2D col;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        // 检查是否成功获取了Animator组件
+        if (animator != null)
+        {
+            // 在这里可以使用animator来控制动画状态等
+            // 例如：animator.SetTrigger("YourTriggerName");
+        }
+        else
+        {
+            // 如果未能获取Animator组件，进行错误处理
+            Debug.LogError("无法找到Animator组件！");
+        }
         MovePositions = new Transform[] { spTrans01, spTrans02, spTrans03, spTrans04, spTrans05 };
     }
     void Update()
     {
-        animator.SetInteger("massageGreenShortChange", healthMassageGreenShort);
+        animator.SetInteger("massageGShortChange", healthMassageGreenShort);
         if (Input.GetKeyUp(KeyCode.Q)) // 强制减少生命值
-        {
+            {
             ReduceBoxLevel();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !KeyDown)
-            {
-            StartCoroutine(MoveAndDestroyItem(WxmassageGreen_Short, MovePositions));
-            KeyDown = true;
-            Debug.Log("检测到按下2");
-            }
-            else if(Input.GetKeyUp(KeyCode.Alpha2))
-            {
-                KeyDown = false;
-            }
-    }
     public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
         {
             Debug.Log("spawnPosition = " + spawnPosition.position);
