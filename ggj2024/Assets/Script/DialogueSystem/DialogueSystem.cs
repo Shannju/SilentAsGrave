@@ -19,7 +19,10 @@ namespace Script.DialogueSystem
         public GameObject WxMessageBoxPrefabShort;
         public GameObject WxWhiteBoxPrefab;
         public GameObject WxWhiteBoxPrefabShort;
-        private bool KeyDown = false;
+        private bool KeyDown1 = false;
+        private bool KeyDown2 = false;
+        private bool KeyDown3 = false;
+        private bool KeyDown4 = false;
         public float moveDuration = 1.0f; // 协程中，平滑移动的距离。值越小，移动越快。
         void Start()
         {
@@ -38,15 +41,48 @@ namespace Script.DialogueSystem
         
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !KeyDown)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !KeyDown1)//可用
             {
             StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefab, MovePositions));
-            KeyDown = true;
-            Debug.Log("检测到按下空格");
+            KeyDown1 = true;
+            Debug.Log("检测到按下1");
             }
-            else if(Input.GetKeyUp(KeyCode.Space))
+            else if(Input.GetKeyUp(KeyCode.Alpha1))
             {
-                KeyDown = false;
+                KeyDown1 = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2) && !KeyDown2)
+            {
+            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefab, MovePositions));
+            KeyDown2 = true;
+            Debug.Log("检测到按下1");
+            }
+            else if(Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                KeyDown2 = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3) && !KeyDown3)
+            {
+            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefabShort, MovePositions));
+            KeyDown3 = true;
+            Debug.Log("检测到按下3");
+            }
+            else if(Input.GetKeyUp(KeyCode.Alpha3))
+            {
+                KeyDown3 = false;
+            }
+        
+            if (Input.GetKeyDown(KeyCode.Alpha4) && !KeyDown4)
+            {
+            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefabShort, MovePositions));
+            KeyDown4 = true;
+            Debug.Log("检测到按下4");
+            }
+            else if(Input.GetKeyUp(KeyCode.Alpha4))
+            {
+                KeyDown4 = false;
             }
         }
         public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
