@@ -8,7 +8,7 @@ using UnityEngine;
 
 public abstract class BasePlayerController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer playerHandRenderer;
+    [SerializeField] private GameObject playerHand;
 
     public bool acceptMoveInput = true;
     public float moveSpeed = 5f;
@@ -139,7 +139,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected async void Slap() // 拍打技能
     {
-        playerHandRenderer.transform.rotation = Quaternion.LookRotation(inputVector);
+/*        playerHandRenderer.transform.rotation = Quaternion.LookRotation(inputVector);*/
         // 检测前方180°范围内的物体
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slapRange, slapLayerMask);
         Debug.Log($"{gameObject.name} use Slap.");
@@ -147,8 +147,9 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             Debug.Log(go.name);
         }
+        playerHand.GetComponent<HandController>().PlayLeft();
 
-
+/*
         // 使用 DOTween 改变颜色
         await DOTween.To(() => playerHandRenderer.color, x => playerHandRenderer.color = x, new Color(1, 1, 1, 1), 0.2f).SetEase(Ease.InCirc);
 
@@ -162,7 +163,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
         // 重置 playerHand 位置和颜色
         playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-        playerHandRenderer.color = new Color(1, 1, 1, 0);
+        playerHandRenderer.color = new Color(1, 1, 1, 0);*/
     }
 
     protected void UpdateDirectionIndicator()
