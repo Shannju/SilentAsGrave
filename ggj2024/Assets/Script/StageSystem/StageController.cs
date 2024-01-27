@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Script.Mapping;
 using Script.StageSystem;
@@ -12,6 +13,7 @@ public class StageController : MonoBehaviour
     [SerializeField] private Image sweatyBean;
     private IStage currentStage;
     private Tweener rotationTweener;
+    public bool isQuart = false;
 
     private void Awake()
     {
@@ -31,23 +33,23 @@ public class StageController : MonoBehaviour
 
     public async void ChangeHeadingStage()
     {
-        currentStage?.ExitStage();
+        await currentStage.ExitStage();
         currentStage = headingStage;
-        currentStage.EnterStage();
+        await currentStage.EnterStage();
     }
 
     public async void ChangeGameplayStage()
     {
-        currentStage?.ExitStage();
+        await currentStage.ExitStage();
         currentStage = gameplayStage;
-        currentStage.EnterStage();
+        await currentStage.EnterStage();
     }
 
     public async void ChangeGameOverStage()
     {
-        currentStage?.ExitStage();
+        await currentStage.ExitStage();
         currentStage = gameOverStage;
-        currentStage.EnterStage();
+        await currentStage.EnterStage();
     }
 
     public void ScrollSweatyBean()
@@ -57,5 +59,20 @@ public class StageController : MonoBehaviour
             .SetLoops(-1, LoopType.Incremental);
         DOTween.To(value => { sweatyBean.transform.localPosition = new Vector3(value, 0, 0); }
             , -1500, 1500, 0.8f).OnComplete(() => rotationTweener.Kill());
+    }
+
+    public void ScrollQuartSweatyBean()
+    {
+        isQuart = true;
+        DOTween.To(value => { sweatyBean.transform.localPosition = new Vector3(value, 0, 0); }
+            , -1500, -815, 0.8f);
+        sweatyBean.transform.DORotate(new Vector3(0, 0, -30), 0.8f);
+    }
+
+    public async UniTask ScrollQuartReset()
+    {
+        sweatyBean.transform.DORotate(new Vector3(0, 0, 0), 0.8f);
+        await DOTween.To(value => { sweatyBean.transform.localPosition = new Vector3(value, 0, 0); }
+            , -815, -1500, 0.8f).ToUniTask();
     }
 }

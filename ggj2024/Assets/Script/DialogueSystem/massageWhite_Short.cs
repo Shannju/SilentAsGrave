@@ -22,6 +22,7 @@ public class massageWhite_Short : MonoBehaviour
     [SerializeField] private Collider2D col;
     void Start()
     {
+        animator = GetComponent<Animator>();
         MovePositions = new Transform[] { spTrans01, spTrans02, spTrans03, spTrans04, spTrans05 };
     }
     void Update()

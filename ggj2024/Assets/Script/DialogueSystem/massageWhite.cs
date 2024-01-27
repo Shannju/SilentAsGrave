@@ -30,18 +30,7 @@ public class massageWhite : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q))
         {
             ReduceBoxLevel();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !KeyDown)
-            {
-            StartCoroutine(MoveAndDestroyItem(WxmassageGreen_Short, MovePositions));
-            KeyDown = true;
-            Debug.Log("检测到按下2");
-            }
-            else if(Input.GetKeyUp(KeyCode.Alpha2))
-            {
-                KeyDown = false;
-            }
-        
+        }        
     }
     public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
         {
@@ -49,7 +38,8 @@ public class massageWhite : MonoBehaviour
             GameObject spawnedPrefab = Instantiate(prefabToSpawn, spawnPosition);
             return spawnedPrefab;
         }
-        private IEnumerator MoveAndDestroyItem(GameObject prefab, Transform[] positions) {
+        private IEnumerator MoveAndDestroyItem(GameObject prefab, Transform[] positions) 
+        {
             // 首先，在初始位置实例化物品
             GameObject item = SpawnPrefab(prefab, positions[0]);
 
