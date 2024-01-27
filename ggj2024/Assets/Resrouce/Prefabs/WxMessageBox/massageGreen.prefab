@@ -66,7 +66,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 6543286092080982775}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bae253b2b26491c4ab7b9ff171cbd0b1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -119,8 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f1bb02be6762046a83c0838b1c3e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spTrans01: {fileID: 0}
+  spTrans02: {fileID: 0}
+  spTrans03: {fileID: 0}
+  spTrans04: {fileID: 0}
+  spTrans05: {fileID: 0}
+  WxmassageGreen_Short: {fileID: 0}
+  GenerateInterval: 10
   healthMassageGreen: 5
-  bone_2: {fileID: 0}
+  moveDuration: 1
   col: {fileID: 0}
 --- !u!50 &-5264797481011009559
 Rigidbody2D:
