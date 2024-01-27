@@ -25,12 +25,12 @@ public class PlayerController3 : BasePlayerController
         // 计算力的向量
         Vector2 force = inputVector * moveSpeed * currentSpeedModifier * Time.fixedDeltaTime * forceTime;
         rb.AddForce(force);
-        
+
         // 使用Lerp平滑当前速度到目标速度
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, inertia * Time.deltaTime);
 
         // 移动玩家
-        transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
+        //transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
         
         // 在MovePlayer方法中更新lastMoveDirection
         if ((Vector2)inputVector != Vector2.zero)

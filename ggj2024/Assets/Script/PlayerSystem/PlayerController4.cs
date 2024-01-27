@@ -35,7 +35,7 @@ public class PlayerController4 : BasePlayerController
         rb.AddForce(force);
         
         // 移动玩家
-        transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
+        //transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
         // 在MovePlayer方法中更新lastMoveDirection
         if (mousePosition != Vector2.zero)
         {
