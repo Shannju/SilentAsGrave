@@ -38,13 +38,13 @@ namespace Script.DialogueSystem
         
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !KeyDown)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !KeyDown)
             {
             StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefab, MovePositions));
             KeyDown = true;
-            Debug.Log("检测到按下空格");
+            Debug.Log("检测到按下1");
             }
-            else if(Input.GetKeyUp(KeyCode.Space))
+            else if(Input.GetKeyUp(KeyCode.Alpha1))
             {
                 KeyDown = false;
             }
