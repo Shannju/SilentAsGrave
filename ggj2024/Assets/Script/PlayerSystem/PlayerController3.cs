@@ -4,7 +4,11 @@ using UnityEngine;
 public class PlayerController3 : BasePlayerController
 {
     // 添加拍打范围和力量的变量
-
+    protected override void Die()
+    {
+        SetWeapon(BeanType.DeadBean);
+        EventManager.SendMessage(GameEventType.Player3Dead);
+    }
     protected override void MovePlayer()
     {
         // 使用TFGH键位来设置目标速度向量

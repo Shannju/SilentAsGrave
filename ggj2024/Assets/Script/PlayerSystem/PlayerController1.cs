@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerController1 : BasePlayerController
 {
+    protected override void Die()
+    {
+        SetWeapon(BeanType.DeadBean);
+        EventManager.SendMessage(GameEventType.Player1Dead);
+    }
+
     // 添加拍打范围和力量的变量
     protected override void MovePlayer() 
     {
