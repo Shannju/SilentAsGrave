@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class massageWhite_Short : MonoBehaviour
 {
-    public int healthMassageWhiteShort = 5;
+    public int healthMassageWhiteShort = 6;
+    private Animator animator;
+    [SerializeField] private Collider2D col;
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        animator.SetInteger("massageWhiteShortChange", healthMassageWhiteShort);
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            ReduceBoxLevel();
+        }
+    }
+    public void ReduceBoxLevel()
+    {
+        healthMassageWhiteShort -= 1;
+        if (healthMassageWhiteShort <= 0)
+        {
+            col.enabled = false;
+        }
     }
 }
