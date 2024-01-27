@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Script.Mapping;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace Script.StageSystem
 
         private void OnExitBtnClick()
         {
-            
+            stageController.ChangeGameOverStage();
         }
 
         public async UniTask InitStage()
@@ -28,11 +27,12 @@ namespace Script.StageSystem
         public async UniTask EnterStage()
         {
             EventManager.SendMessage(GameEventType.GameStart);
+            exitGameplayBtn.gameObject.SetActive(true);
         }
 
         public async UniTask ExitStage()
         {
-            
+            exitGameplayBtn.gameObject.SetActive(false);
         }
     }
 }
