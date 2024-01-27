@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController1 : BasePlayerController
 {
     private Rigidbody2D rb; // 计算力的向量中间值
+
+
     protected void Start()
     {
         SetWeapon(BeanType.NormalBean);
@@ -71,5 +73,12 @@ public class PlayerController1 : BasePlayerController
             Slap();
             slapCooldown = GameConfig.SlapCooldown;
         } // 当按下J键时返回true
+    }
+
+    protected override void Die()
+    {
+        SetWeapon(BeanType.DeadBean);
+        EventManager.SendMessage(GameEventType.Player1Dead);
+
     }
 }

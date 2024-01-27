@@ -3,15 +3,12 @@ using UnityEngine;
 
 public class PlayerController3 : BasePlayerController
 {
-    private Rigidbody2D rb; // 计算力的向量中间值
-    protected void Start()
-    {
-        SetWeapon(BeanType.NormalBean);
-        originalMoveSpeed = moveSpeed;
-        rb = GetComponent<Rigidbody2D>();
-    }
     // 添加拍打范围和力量的变量
-
+    protected override void Die()
+    {
+        SetWeapon(BeanType.DeadBean);
+        EventManager.SendMessage(GameEventType.Player3Dead);
+    }
     protected override void MovePlayer()
     {
         // 使用TFGH键位来设置目标速度向量
@@ -21,11 +18,6 @@ public class PlayerController3 : BasePlayerController
         ).normalized;
 
         targetVelocity = inputVector * moveSpeed * currentSpeedModifier;
-
-        // 计算力的向量
-        Vector2 force = inputVector * moveSpeed * currentSpeedModifier * Time.fixedDeltaTime * forceTime;
-        rb.AddForce(force);
-        
 
         // 使用Lerp平滑当前速度到目标速度
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, inertia * Time.deltaTime);

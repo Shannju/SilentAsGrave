@@ -71,4 +71,10 @@ public class PlayerController2 : BasePlayerController
             slapCooldown = GameConfig.SlapCooldown;
         } // 当按下小键盘数字1键时返回true
     }
+
+    protected override void Die()
+    {
+        SetWeapon(BeanType.DeadBean);
+        EventManager.SendMessage(GameEventType.Player2Dead);
+    }
 }
