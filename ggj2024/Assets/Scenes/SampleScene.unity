@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2643028870739456134, guid: d795f858cfa61d74a9b029434c6fad3b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7367302183732167914, guid: d795f858cfa61d74a9b029434c6fad3b, type: 3}
       propertyPath: m_Name
       value: Player1
@@ -380,10 +384,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1227873544}
   - {fileID: 1297702555}
   - {fileID: 502123167}
   - {fileID: 2144846174}
-  - {fileID: 1227873544}
   - {fileID: 1342160423}
   - {fileID: 405025020}
   - {fileID: 1478324711}

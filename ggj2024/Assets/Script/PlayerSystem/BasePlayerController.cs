@@ -52,6 +52,8 @@ public abstract class BasePlayerController : MonoBehaviour
     private bool loveState = false;
     private float loveTimeDuration = 0f;
 
+    private Vector2Int currentDirection = Vector2Int.zero;
+
     # endregion
 
     # region ==== Weapon Prefabs ====
@@ -147,23 +149,48 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             Debug.Log(go.name);
         }
-        playerHand.GetComponent<HandController>().PlayLeft();
+        Debug.Log("dir  " + currentDirection.x);
 
-/*
-        // 使用 DOTween 改变颜色
-        await DOTween.To(() => playerHandRenderer.color, x => playerHandRenderer.color = x, new Color(1, 1, 1, 1), 0.2f).SetEase(Ease.InCirc);
+        // 判断inputVector的方向
+        if (currentDirection.x < 0)
+        {
+            // 如果inputVector向左
+            playerHand.GetComponent<HandController>().PlayLeft();
+        }
+        else if (currentDirection.x > 0)
+        {
+            // 如果inputVector向右
+            playerHand.GetComponent<HandController>().PlayRight();
+        }
+        else
+        {
+            if (UnityEngine.Random.Range(0, 2) == 0)
+            {
+                playerHand.GetComponent<HandController>().PlayLeft();
+                Debug.LogWarning("Randomly selected PlayLeft");
+            }
+            else
+            {
+                playerHand.GetComponent<HandController>().PlayRight();
+                Debug.LogWarning("Randomly selected PlayRight");
+            }
+        }
 
-        // 计算移动的目标位置
-        Vector3 targetPosition = playerHandRenderer.gameObject.transform.localPosition + new Vector3(inputVector.x, inputVector.y, 0) * 0.1f;
+        /*
+                // 使用 DOTween 改变颜色
+                await DOTween.To(() => playerHandRenderer.color, x => playerHandRenderer.color = x, new Color(1, 1, 1, 1), 0.2f).SetEase(Ease.InCirc);
 
-        // 使用 DOTween 移动手掌
-        await DOTween.To(() => playerHandRenderer.gameObject.transform.localPosition, x => playerHandRenderer.gameObject.transform.localPosition = x, targetPosition, 0.2f).SetEase(Ease.OutCirc);
+                // 计算移动的目标位置
+                Vector3 targetPosition = playerHandRenderer.gameObject.transform.localPosition + new Vector3(inputVector.x, inputVector.y, 0) * 0.1f;
 
-        await UniTask.Delay(TimeSpan.FromSeconds(1d));
+                // 使用 DOTween 移动手掌
+                await DOTween.To(() => playerHandRenderer.gameObject.transform.localPosition, x => playerHandRenderer.gameObject.transform.localPosition = x, targetPosition, 0.2f).SetEase(Ease.OutCirc);
 
-        // 重置 playerHand 位置和颜色
-        playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-        playerHandRenderer.color = new Color(1, 1, 1, 0);*/
+                await UniTask.Delay(TimeSpan.FromSeconds(1d));
+
+                // 重置 playerHand 位置和颜色
+                playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+                playerHandRenderer.color = new Color(1, 1, 1, 0);*/
     }
 
     protected void UpdateDirectionIndicator()
@@ -181,6 +208,9 @@ public abstract class BasePlayerController : MonoBehaviour
 
             // 围绕玩家椭圆
             directionIndicator.transform.position = new Vector3(xPosition, yPosition, 0f);
+            // 更新当前方向
+            currentDirection.x = xPosition >= 0 ? 1 : -1; // 如果x >= 0, 则为右（1），否则为左（-1）
+            currentDirection.y = yPosition >= 0 ? 1 : -1; // 如果y >= 0, 则为上（1），否则为下（-1）
         }
     }
 
