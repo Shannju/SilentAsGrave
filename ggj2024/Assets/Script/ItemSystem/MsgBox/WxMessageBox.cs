@@ -10,7 +10,7 @@ namespace Script.ItemSystem.MsgBox
         public void ReduceBoxLevel()
         {
             hitCount -= 1;
-            if (hitCount == 0)
+            if (hitCount <= 0)
             {
                 col.enabled = false;
             }

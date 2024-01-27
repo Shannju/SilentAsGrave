@@ -38,9 +38,4 @@ public class PlayerController4 : BasePlayerController
     protected override void UseSkill()
     {
     }
-
-    protected override void Die()
-    {
-/*        throw new System.NotImplementedException();*/
-    }
 }

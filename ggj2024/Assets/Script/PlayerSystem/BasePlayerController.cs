@@ -25,7 +25,7 @@ public abstract class BasePlayerController : MonoBehaviour
     protected LayerMask slapLayerMask; // LayerMask用于识别其他玩家
     protected Vector2 lastMoveDirection; // 存储上一次的移动方向
     protected Vector2 position;
-    public GameObject directionIndicator;a
+    public GameObject directionIndicator;
     public float ellipseWidth = 0.2f; // 椭圆长轴的一半（横向）
     public float ellipseHeight = 0.1f; // 椭圆短轴的一半（纵向）
     protected float ellipseAngle = 0f;
@@ -64,7 +64,7 @@ public abstract class BasePlayerController : MonoBehaviour
     protected IWeapon currentBean;
 
     #endregion
-    protected abstract void Die();
+
 
     protected abstract void MovePlayer();
     protected abstract void UseSlap();
