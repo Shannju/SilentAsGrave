@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Script.Interface.ItemSystem;
 using Script.ItemSystem.Weapon;
 using Script.Mapping;
@@ -64,7 +65,7 @@ public abstract class BasePlayerController : MonoBehaviour
     protected IWeapon currentBean;
 
     #endregion
-
+    protected abstract void Die();
 
     protected abstract void MovePlayer();
     protected abstract void UseSlap();
@@ -146,17 +147,22 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             Debug.Log(go.name);
         }
-        
-        playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-        // await DOTween.To(value => { playerHandRenderer.color = new Color(1, 1, 1, value); }
-        //         , 0f, 1f, 0.4f)
-            // .SetEase(Ease.InCirc);
-        await UniTask.Delay(TimeSpan.FromSeconds(1d));
-        // Do punch
 
-        // await DOTween.To(value => { playerHandRenderer.color = new Color(1, 1, 1, value); }
-        //         , 1f, 0f, 0.4f)
-        //     .SetEase(Ease.OutCirc);
+
+        // 使用 DOTween 改变颜色
+        await DOTween.To(() => playerHandRenderer.color, x => playerHandRenderer.color = x, new Color(1, 1, 1, 1), 0.2f).SetEase(Ease.InCirc);
+
+        // 计算移动的目标位置
+        Vector3 targetPosition = playerHandRenderer.gameObject.transform.localPosition + new Vector3(inputVector.x, inputVector.y, 0) * 0.1f;
+
+        // 使用 DOTween 移动手掌
+        await DOTween.To(() => playerHandRenderer.gameObject.transform.localPosition, x => playerHandRenderer.gameObject.transform.localPosition = x, targetPosition, 0.2f).SetEase(Ease.OutCirc);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(1d));
+
+        // 重置 playerHand 位置和颜色
+        playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+        playerHandRenderer.color = new Color(1, 1, 1, 0);
     }
 
     protected void UpdateDirectionIndicator()
