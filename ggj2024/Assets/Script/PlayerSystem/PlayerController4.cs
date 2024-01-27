@@ -1,10 +1,17 @@
+using Script.Mapping;
 using UnityEngine;
 
 public class PlayerController4 : BasePlayerController
 {
     public Vector2 mousePosition = Vector2.zero;
     private Vector2 direct = Vector2.zero;
-
+    private Rigidbody2D rb; // 计算力的向量中间值
+    protected void Start()
+    {
+        SetWeapon(BeanType.NormalBean);
+        originalMoveSpeed = moveSpeed;
+        rb = GetComponent<Rigidbody2D>();
+    }
     protected override void UseSlap()
     {
     }
@@ -22,7 +29,10 @@ public class PlayerController4 : BasePlayerController
             targetVelocity = direct * moveSpeed * currentSpeedModifier;
             currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, inertia * Time.deltaTime);
         }
-
+        // 计算力的向量
+        Vector2 force = inputVector * moveSpeed * currentSpeedModifier * Time.fixedDeltaTime * forceTime;
+        rb.AddForce(force);
+        
         // 移动玩家
         transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
         // 在MovePlayer方法中更新lastMoveDirection

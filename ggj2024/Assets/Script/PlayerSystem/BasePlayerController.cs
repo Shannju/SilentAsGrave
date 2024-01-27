@@ -11,6 +11,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     public bool acceptMoveInput = true;
     public float moveSpeed = 5f;
+    public float forceTime = 5f; // 力扩大倍数
     public float originalMoveSpeed;
     public float speedMultiplier = 1.5f; // X轴拉伸系数
     protected float currentSpeedModifier = 1f;
@@ -119,8 +120,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected void Start()
     {
-        SetWeapon(BeanType.NormalBean);
-        originalMoveSpeed = moveSpeed;
+        
         // playerHandRenderer.color = new Color(1, 1, 1, 1);
     }
 
