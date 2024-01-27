@@ -30,7 +30,7 @@ public class PlayerController2 : BasePlayerController
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, inertia * Time.deltaTime);
 
         // 移动玩家
-        transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
+        //transform.position += new Vector3(currentVelocity.x, currentVelocity.y, 0f) * Time.deltaTime;
         
         // 在MovePlayer方法中更新lastMoveDirection
         if ((Vector2)inputVector != Vector2.zero)
