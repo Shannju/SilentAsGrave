@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2338941616500164987}
   - component: {fileID: 4368572157521803834}
   m_Layer: 0
-  m_Name: hit
+  m_Name: hitGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
