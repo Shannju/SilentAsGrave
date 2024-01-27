@@ -5,15 +5,12 @@ using UnityEngine;
 public class PlayerController1 : BasePlayerController
 {
     private Rigidbody2D rb; // 计算力的向量中间值
-
-
     protected void Start()
     {
         SetWeapon(BeanType.NormalBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
     }
-    
     // 添加拍打范围和力量的变量
     protected override void MovePlayer() 
     {

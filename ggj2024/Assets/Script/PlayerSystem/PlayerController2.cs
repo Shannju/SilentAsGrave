@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Script.Mapping;
 using UnityEngine;
 
@@ -25,7 +26,6 @@ public class PlayerController2 : BasePlayerController
         Vector2 force = inputVector * moveSpeed * currentSpeedModifier * Time.fixedDeltaTime * forceTime;
         rb.AddForce(force);
         
-
         // 使用Lerp平滑当前速度到目标速度
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, inertia * Time.deltaTime);
 
