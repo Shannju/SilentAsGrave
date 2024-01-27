@@ -1,8 +1,11 @@
 using Cysharp.Threading.Tasks;
 using Script.StageSystem;
+using UnityEngine;
 
-public class GameOverStage : IStage
+public class GameOverStage : MonoBehaviour, IStage
 {
+    [SerializeField] public StageController stageController;
+
     public async UniTask InitStage()
     {
     }
