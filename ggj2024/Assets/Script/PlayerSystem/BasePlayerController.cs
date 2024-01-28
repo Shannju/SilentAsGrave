@@ -141,7 +141,6 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected async void Slap() // 拍打技能
     {
-/*        playerHandRenderer.transform.rotation = Quaternion.LookRotation(inputVector);*/
         // 检测前方180°范围内的物体
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slapRange, slapLayerMask);
         Debug.Log($"{gameObject.name} use Slap.");

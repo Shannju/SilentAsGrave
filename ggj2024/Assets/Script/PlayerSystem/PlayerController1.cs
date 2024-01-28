@@ -7,7 +7,8 @@ public class PlayerController1 : BasePlayerController
     private Rigidbody2D rb; // 计算力的向量中间值
     protected void Start()
     {
-        SetWeapon(BeanType.NormalBean);
+        /*SetWeapon(BeanType.NormalBean);*/
+        SetWeapon(BeanType.SweatyBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
     }
