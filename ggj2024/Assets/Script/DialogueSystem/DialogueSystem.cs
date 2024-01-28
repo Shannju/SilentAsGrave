@@ -163,7 +163,7 @@ namespace Script.DialogueSystem
                 currentTargetPosition = positions[i].position;
                 Vector3 startPosition = item.transform.position;
                 Vector3 endPosition = positions[i].position;
-                itemAnimator.SetInteger("massageGreenChange", health);
+               /* itemAnimator.SetInteger("massageGreenChange", health);*/
                 health--;
 
                 // 检查动画状态并在适当时销毁物品

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,11 +40,6 @@ public class massageGreen_Short : MonoBehaviour
     }
     void Update()
     {
-        animator.SetInteger("massageGShortChange", healthMassageGreenShort);
-        if (Input.GetKeyUp(KeyCode.Q)) // 强制减少生命值
-            {
-            ReduceBoxLevel();
-            }
         }
     public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
         {
@@ -83,10 +79,37 @@ public class massageGreen_Short : MonoBehaviour
         }
     public void ReduceBoxLevel()
     {
+        CallFunction();
         healthMassageGreenShort -= 1;
         if (healthMassageGreenShort <= 0)
         {
             col.enabled = false;
+        }
+    }
+    private int callCount = 0;
+    public void CallFunction()
+    {
+        if (callCount < 3)
+        {
+            switch (callCount)
+            {
+                case 0:
+                    animator.SetTrigger("New Trigger1");
+                    break;
+                case 1:
+                    animator.SetTrigger("New Trigger2");
+                    break;
+                case 2:
+                    animator.SetTrigger("New Trigger3");
+                    break;
+            }
+
+            callCount++;
+        }
+        else
+        {
+            // callCount >= 3，不执行任何操作
+            Console.WriteLine("No more function calls.");
         }
     }
 }

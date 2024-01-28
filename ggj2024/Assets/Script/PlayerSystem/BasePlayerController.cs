@@ -26,7 +26,6 @@ public abstract class BasePlayerController : MonoBehaviour
     public float inertia = 0.7f; // 可调整的惯性系数
     public int direction = 1;
 
-    public float slapRange = 1f;
     public float slapForce = 5f;
     protected LayerMask slapLayerMask; // LayerMask用于识别其他玩家
     protected Vector2 lastMoveDirection; // 存储上一次的移动方向
@@ -151,6 +150,29 @@ public abstract class BasePlayerController : MonoBehaviour
         Debug.Log($"{gameObject.name} use Slap.");
         foreach (var go in hits)
         {
+           if (go.tag == "MessageBox")
+            {
+                    Debug.LogWarning("is message box!!!!");
+                if (go.TryGetComponent<massageGreen>(out var component))
+                {
+                    Debug.LogWarning("hit!!!!");
+                    component.ReduceBoxLevel();
+                }
+                else if (go.TryGetComponent< massageGreen_Short> (out var component1))
+                {
+                    component1.ReduceBoxLevel();
+                }
+                else if (go.TryGetComponent<massageWhite>(out var component2))
+                {
+                    component2.ReduceBoxLevel();
+                }
+                else if (go.TryGetComponent<massageWhite_Short>(out var component3))
+                {
+                    component3.ReduceBoxLevel();
+                }
+
+
+            }
             Debug.Log(go.name);
         }
  /*       Debug.Log("dir  " + currentDirection.x);*/

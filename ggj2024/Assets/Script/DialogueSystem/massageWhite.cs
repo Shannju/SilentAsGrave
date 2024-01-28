@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,11 +27,7 @@ public class massageWhite : MonoBehaviour
     }
     void Update()
     {
-        animator.SetInteger("massageWhiteChange", healthMassageWhite);
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            ReduceBoxLevel();
-        }        
+
     }
     public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
         {
@@ -71,10 +68,37 @@ public class massageWhite : MonoBehaviour
         }
     public void ReduceBoxLevel()
     {
+        CallFunction();
         healthMassageWhite -= 1;
         if (healthMassageWhite <= 0)
         {
             col.enabled = false;
+        }
+    }
+    private int callCount = 0;
+    public void CallFunction()
+    {
+        if (callCount < 3)
+        {
+            switch (callCount)
+            {
+                case 0:
+                    animator.SetTrigger("New Trigger1");
+                    break;
+                case 1:
+                    animator.SetTrigger("New Trigger2");
+                    break;
+                case 2:
+                    animator.SetTrigger("New Trigger3");
+                    break;
+            }
+
+            callCount++;
+        }
+        else
+        {
+            // callCount >= 3，不执行任何操作
+            Console.WriteLine("No more function calls.");
         }
     }
 }
