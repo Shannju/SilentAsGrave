@@ -5,7 +5,7 @@ namespace Script.ItemSystem.Bullet
 {
     public class LoveBullet : MonoBehaviour
     {
-       private Vector3 bulletVector;
+        private Vector3 bulletVector;
         private float lifeTime = 0f;
 
         private void Update()
