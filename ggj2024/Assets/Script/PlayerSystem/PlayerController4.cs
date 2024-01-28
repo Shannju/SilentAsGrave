@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController4 : BasePlayerController
 {
-    public Vector2 mousePosition = Vector2.zero;
+/*    public Vector2 mousePosition = Vector2.zero;
     private Vector2 direct = Vector2.zero;
     private Rigidbody2D rb; // 计算力的向量中间值
     protected void Start()
@@ -12,14 +12,14 @@ public class PlayerController4 : BasePlayerController
         SetWeapon(BeanType.NormalBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
-    }
+    }*/
     protected override void UseSlap()
     {
     }
 
     protected override void MovePlayer()
     {
-        // 在这里编写鼠标控制移动的逻辑
+/*        // 在这里编写鼠标控制移动的逻辑
         if (Input.GetMouseButton(0)) // 检查鼠标左键是否被按住
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -43,7 +43,7 @@ public class PlayerController4 : BasePlayerController
             lastMoveDirection = -perpendicularVector;
         }
 
-        UpdateDirectionIndicator();
+        UpdateDirectionIndicator();*/
     }
 
     protected override void UseSkill()

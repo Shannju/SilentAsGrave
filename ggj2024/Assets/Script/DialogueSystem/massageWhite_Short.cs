@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,10 +73,38 @@ public class massageWhite_Short : MonoBehaviour
         }
     public void ReduceBoxLevel()
     {
+        CallFunction();
         healthMassageWhiteShort -= 1;
         if (healthMassageWhiteShort <= 0)
         {
             col.enabled = false;
         }
     }
+    private int callCount = 0;
+    public void CallFunction()
+    {
+        if (callCount < 3)
+        {
+            switch (callCount)
+            {
+                case 0:
+                    animator.SetTrigger("New Trigger1");
+                    break;
+                case 1:
+                    animator.SetTrigger("New Trigger2");
+                    break;
+                case 2:
+                    animator.SetTrigger("New Trigger3");
+                    break;
+            }
+
+            callCount++;
+        }
+        else
+        {
+            // callCount >= 3，不执行任何操作
+            Console.WriteLine("No more function calls.");
+        }
+    }
+
 }

@@ -257,7 +257,7 @@ MonoBehaviour:
   GenerateInterval: 10
   healthMassageGreenShort: 3
   moveDuration: 1
-  col: {fileID: 0}
+  col: {fileID: 6765898740776925412}
 --- !u!50 &4417216712856696201
 Rigidbody2D:
   serializedVersion: 4

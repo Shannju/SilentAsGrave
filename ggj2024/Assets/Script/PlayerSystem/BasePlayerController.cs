@@ -112,6 +112,25 @@ public abstract class BasePlayerController : MonoBehaviour
         {
            if (go.tag == "MessageBox")
             {
+                    Debug.LogWarning("is message box!!!!");
+                if (go.TryGetComponent<massageGreen>(out var component))
+                {
+                    Debug.LogWarning("hit!!!!");
+                    component.ReduceBoxLevel();
+                }
+                else if (go.TryGetComponent< massageGreen_Short> (out var component1))
+                {
+                    component1.ReduceBoxLevel();
+                }
+                else if (go.TryGetComponent<massageWhite>(out var component2))
+                {
+                    component2.ReduceBoxLevel();
+                }
+                else if (go.TryGetComponent<massageWhite_Short>(out var component3))
+                {
+                    component3.ReduceBoxLevel();
+                }
+
 
             }
             Debug.Log(go.name);
