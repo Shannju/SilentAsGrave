@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Script.Mapping;
 
 namespace Script.DialogueSystem
 {
@@ -51,11 +52,17 @@ namespace Script.DialogueSystem
         private bool KeyDown4 = false;
         private Vector3 currentTargetPosition;
         private GameObject item;
+        private bool started = false;
         
         public float maxForce = 3.0f; // 设定力的上限值
 
         public float ForceTimes = 1f;
         public float moveDuration = 1.0f; // 协程中，平滑移动的距离。值越小，移动越快。
+        void Awake()
+        {
+            EventManager.AddListener(GameEventType.GameStart, OnGameStart);
+            EventManager.AddListener(GameEventType.GameOver, OnGameOver);
+        }
         void Start()
         {
             MovePositionsL = new Transform[] { spTrans01L, spTrans02L, spTrans03L, spTrans04L, spTrans05L };
@@ -75,57 +82,70 @@ namespace Script.DialogueSystem
         
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !KeyDown1)// GREEN LONG
+            if (Input.GetKeyUp(KeyCode.Alpha0))
             {
-            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefab, MovePositionsR, healthG));
-            KeyDown1 = true;
-            Debug.Log("检测到按下1");
+                started = false;
             }
-            else if(Input.GetKeyUp(KeyCode.Alpha1))
+            else if (Input.GetKeyUp(KeyCode.Alpha9))
             {
-                KeyDown1 = false;
+                started = true;
             }
+            if (started)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1) && !KeyDown1)// GREEN LONG
+                {
+                StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefab, MovePositionsR, healthG));
+                KeyDown1 = true;
+                Debug.Log("检测到按下1");
+                }
+                else if(Input.GetKeyUp(KeyCode.Alpha1))
+                {
+                    KeyDown1 = false;
+                }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && !KeyDown2)// WHITE LONG
-            {
-            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefab, MovePositionsL, healthW));
-            KeyDown2 = true;
-            Debug.Log("检测到按下2");
-            }
-            else if(Input.GetKeyUp(KeyCode.Alpha2))
-            {
-                KeyDown2 = false;
-            }
+                if (Input.GetKeyDown(KeyCode.Alpha2) && !KeyDown2)// WHITE LONG
+                {
+                StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefab, MovePositionsL, healthW));
+                KeyDown2 = true;
+                Debug.Log("检测到按下2");
+                }
+                else if(Input.GetKeyUp(KeyCode.Alpha2))
+                {
+                    KeyDown2 = false;
+                }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3) && !KeyDown3)// GS
-            {
-            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefabShort, MovePositionsRM, healthGS));
-            KeyDown3 = true;
-            Debug.Log("检测到按下3");
-            }
-            else if(Input.GetKeyUp(KeyCode.Alpha3))
-            {
-                KeyDown3 = false;
-            }
-        
-            if (Input.GetKeyDown(KeyCode.Alpha4) && !KeyDown4)// WS
-            {
-            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefabShort, MovePositionsLM, healthWS));
-            KeyDown4 = true;
-            Debug.Log("检测到按下4");
-            }
-            else if(Input.GetKeyUp(KeyCode.Alpha4))
-            {
-                KeyDown4 = false;
-            }
+                if (Input.GetKeyDown(KeyCode.Alpha3) && !KeyDown3)// GS
+                {
+                StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefabShort, MovePositionsRM, healthGS));
+                KeyDown3 = true;
+                Debug.Log("检测到按下3");
+                }
+                else if(Input.GetKeyUp(KeyCode.Alpha3))
+                {
+                    KeyDown3 = false;
+                }
+            
+                if (Input.GetKeyDown(KeyCode.Alpha4) && !KeyDown4)// WS
+                {
+                StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefabShort, MovePositionsLM, healthWS));
+                KeyDown4 = true;
+                Debug.Log("检测到按下4");
+                }
+                else if(Input.GetKeyUp(KeyCode.Alpha4))
+                {
+                    KeyDown4 = false;
+                }
 
-            if (item != null && currentTargetPosition != Vector3.zero) {
-            // 计算并应用力
-            Vector3 direction = currentTargetPosition - item.transform.position;
-            float distance = direction.magnitude;
-            Vector3 force = direction.normalized * Mathf.Min(1 / Mathf.Max(distance, 0.1f), maxForce);
-            item.transform.position += force * Time.deltaTime;
-    }
+                if (item != null && currentTargetPosition != Vector3.zero) {
+                // 计算并应用力
+                /*
+                Vector3 direction = currentTargetPosition - item.transform.position;
+                float distance = direction.magnitude;
+                Vector3 force = 5 * direction.normalized * Mathf.Min(1 / Mathf.Max(distance, 0.1f), maxForce);
+                item.transform.position += force * Time.deltaTime;
+                */
+                }
+            }
         }
         public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
         {
@@ -184,7 +204,14 @@ namespace Script.DialogueSystem
             Vector3 position = WxMessageBoxPrefab.transform.position;
             }
         }
-
+        public void OnGameStart()
+        {
+            started = true;
+        }
+        public void OnGameOver()
+        {
+            started = false;
+        }
         // 生成方向（绿色白色）
         // 生成哪一个预制体
         // 功能： Content 生成
