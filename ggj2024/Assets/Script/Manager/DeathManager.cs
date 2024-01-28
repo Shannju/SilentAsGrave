@@ -62,7 +62,7 @@ public class DeathManager : MonoBehaviour
         if (P3isInside)
         {
             P3stayTime += Time.deltaTime;
-            stayTimeText.text = P3stayTime.ToString("F2");
+            stayTimeText3.text = P3stayTime.ToString("F2");
         }
     }
 }
