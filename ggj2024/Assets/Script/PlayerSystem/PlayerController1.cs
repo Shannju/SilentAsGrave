@@ -8,7 +8,7 @@ public class PlayerController1 : BasePlayerController
     protected void Start()
     {
         /*SetWeapon(BeanType.NormalBean);*/
-        SetWeapon(BeanType.SweatyBean);
+        SetWeapon(BeanType.BadWordBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
     }
