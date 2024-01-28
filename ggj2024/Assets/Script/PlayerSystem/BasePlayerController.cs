@@ -8,6 +8,10 @@ using UnityEngine;
 
 public abstract class BasePlayerController : MonoBehaviour
 {
+    [Header("Partical & Hand")]
+    [SerializeField] private ParticleSystem hitGreen;
+    [SerializeField] private ParticleSystem hitWhite;
+    [SerializeField] private ParticleSystem hitSmoke;
     [SerializeField] private GameObject playerHand;
 
     public bool acceptMoveInput = true;
