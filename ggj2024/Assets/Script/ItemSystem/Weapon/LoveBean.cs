@@ -12,8 +12,11 @@ namespace Script.ItemSystem.Weapon
         
         public void UseWeapon(Vector2 currentDirection)
         {
-            var go = Instantiate(bulletPrefab);
-            go.SetVector((bulletStartPoint.transform.position - transform.position).normalized);
+            // 实例化子弹并设置其位置
+            LoveBullet bullet = Instantiate(bulletPrefab, bulletStartPoint.transform.position, Quaternion.identity);
+
+            // 使用 currentDirection 作为发射方向
+            bullet.SetVector(currentDirection.normalized);
         }
         
         public void RemoveBean()

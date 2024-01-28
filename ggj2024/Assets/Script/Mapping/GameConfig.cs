@@ -15,8 +15,8 @@ namespace Script.Mapping
 
         #region ==== Slap & Skill Cooldown ====
 
-        public const float SlapCooldown = 3f;
-        public const float SkillCooldown = 5f;
+        public const float SlapCooldown = 0.5f;
+        public const float SkillCooldown = 0.5f;
 
         #endregion
 
