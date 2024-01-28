@@ -52,7 +52,7 @@ public abstract class BasePlayerController : MonoBehaviour
     private bool loveState = false;
     private float loveTimeDuration = 0f;
 
-    private Vector2Int currentDirection = Vector2Int.zero;
+    protected Vector2 currentDirection = Vector2.zero;
 
     # endregion
 
@@ -106,6 +106,7 @@ public abstract class BasePlayerController : MonoBehaviour
                 slowState = false;
                 slowTimeDuration = 0f;
                 Debug.Log($"Player exit slow state.");
+
             }
         }
 
@@ -148,7 +149,7 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             Debug.Log(go.name);
         }
-        Debug.Log("dir  " + currentDirection.x);
+ /*       Debug.Log("dir  " + currentDirection.x);*/
 
         // 判断inputVector的方向
         if (currentDirection.x < 0)
@@ -208,8 +209,9 @@ public abstract class BasePlayerController : MonoBehaviour
             // 围绕玩家椭圆
             directionIndicator.transform.position = new Vector3(xPosition, yPosition, 0f);
             // 更新当前方向
-            currentDirection.x = xPosition >= 0 ? 1 : -1; // 如果x >= 0, 则为右（1），否则为左（-1）
-            currentDirection.y = yPosition >= 0 ? 1 : -1; // 如果y >= 0, 则为上（1），否则为下（-1）
+            Vector3 dir = directionIndicator.transform.up; // 对于 2D，transform.right 表示 GameObject 的局部右方向
+            currentDirection = new Vector2(dir.x, dir.y).normalized;
+
         }
     }
 

@@ -9,7 +9,7 @@ namespace Script.ItemSystem.Weapon
         [SerializeField] private NaughtyTone naughtyTone;
         [SerializeField] private Animator animator;
         
-        public void UseWeapon()
+        public void UseWeapon(Vector2 currentDirection)
         {
             // naughtyTone.Sweep((transform.position - naughtyTone.transform.position).normalized);
             naughtyTone.Attack();

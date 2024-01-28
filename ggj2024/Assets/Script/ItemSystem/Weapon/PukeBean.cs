@@ -9,7 +9,7 @@ namespace Script.ItemSystem.Weapon
         [SerializeField] private Puke pukePrefab;
         [SerializeField] private Animator animator;
 
-        public void UseWeapon()
+        public void UseWeapon(Vector2 currentDirection)
         {
             var puke = Instantiate(pukePrefab);
             puke.transform.position = gameObject.transform.position;

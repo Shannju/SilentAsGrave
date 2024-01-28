@@ -10,7 +10,7 @@ namespace Script.ItemSystem.Weapon
         [SerializeField] private GameObject bulletStartPoint;
         [SerializeField] private Animator animator;
         
-        public void UseWeapon()
+        public void UseWeapon(Vector2 currentDirection)
         {
             var go = Instantiate(bulletPrefab);
             go.SetVector((bulletStartPoint.transform.position - transform.position).normalized);

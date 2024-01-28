@@ -8,7 +8,7 @@ public class PlayerController1 : BasePlayerController
     protected void Start()
     {
         /*SetWeapon(BeanType.NormalBean);*/
-        SetWeapon(BeanType.BadWordBean);
+        SetWeapon(BeanType.LoveBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -53,7 +53,7 @@ public class PlayerController1 : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            currentBean.UseWeapon();
+            currentBean.UseWeapon(currentDirection);
             skillCooldown = GameConfig.SkillCooldown;
         }
     }

@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1562765733607963711}
   - component: {fileID: 2604269177116381381}
   m_Layer: 0
-  m_Name: another_normal_bean2
+  m_Name: another_normal_bean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

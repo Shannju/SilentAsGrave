@@ -7,7 +7,7 @@ namespace Script.ItemSystem.Weapon
     {
         [SerializeField] private Animator animator;
 
-        public void UseWeapon()
+        public void UseWeapon(Vector2 currentDirection)
         {
         }
         
