@@ -36,6 +36,10 @@ namespace Script.DialogueSystem
         public Transform spTrans05RM;
         private Transform[] MovePositionsRM;
 
+        public int healthG = 9;//绿条
+        public int healthW = 9;
+        public int healthGS = 6;//绿短条
+        public int healthWS = 6;
 
         public GameObject WxMessageBoxPrefab;
         public GameObject WxMessageBoxPrefabShort;
@@ -45,6 +49,12 @@ namespace Script.DialogueSystem
         private bool KeyDown2 = false;
         private bool KeyDown3 = false;
         private bool KeyDown4 = false;
+        private Vector3 currentTargetPosition;
+        private GameObject item;
+        
+        public float maxForce = 3.0f; // 设定力的上限值
+
+        public float ForceTimes = 1f;
         public float moveDuration = 1.0f; // 协程中，平滑移动的距离。值越小，移动越快。
         void Start()
         {
@@ -67,7 +77,7 @@ namespace Script.DialogueSystem
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) && !KeyDown1)// GREEN LONG
             {
-            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefab, MovePositionsR));
+            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefab, MovePositionsR, healthG));
             KeyDown1 = true;
             Debug.Log("检测到按下1");
             }
@@ -78,7 +88,7 @@ namespace Script.DialogueSystem
 
             if (Input.GetKeyDown(KeyCode.Alpha2) && !KeyDown2)// WHITE LONG
             {
-            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefab, MovePositionsL));
+            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefab, MovePositionsL, healthW));
             KeyDown2 = true;
             Debug.Log("检测到按下2");
             }
@@ -89,7 +99,7 @@ namespace Script.DialogueSystem
 
             if (Input.GetKeyDown(KeyCode.Alpha3) && !KeyDown3)// GS
             {
-            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefabShort, MovePositionsRM));
+            StartCoroutine(MoveAndDestroyItem(WxMessageBoxPrefabShort, MovePositionsRM, healthGS));
             KeyDown3 = true;
             Debug.Log("检测到按下3");
             }
@@ -100,7 +110,7 @@ namespace Script.DialogueSystem
         
             if (Input.GetKeyDown(KeyCode.Alpha4) && !KeyDown4)// WS
             {
-            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefabShort, MovePositionsLM));
+            StartCoroutine(MoveAndDestroyItem(WxWhiteBoxPrefabShort, MovePositionsLM, healthWS));
             KeyDown4 = true;
             Debug.Log("检测到按下4");
             }
@@ -108,6 +118,14 @@ namespace Script.DialogueSystem
             {
                 KeyDown4 = false;
             }
+
+            if (item != null && currentTargetPosition != Vector3.zero) {
+            // 计算并应用力
+            Vector3 direction = currentTargetPosition - item.transform.position;
+            float distance = direction.magnitude;
+            Vector3 force = direction.normalized * Mathf.Min(1 / Mathf.Max(distance, 0.1f), maxForce);
+            item.transform.position += force * Time.deltaTime;
+    }
         }
         public GameObject SpawnPrefab(GameObject prefabToSpawn, Transform spawnPosition) // 生成预制体
         {
@@ -115,15 +133,27 @@ namespace Script.DialogueSystem
             GameObject spawnedPrefab = Instantiate(prefabToSpawn, spawnPosition);
             return spawnedPrefab;
         }
-        private IEnumerator MoveAndDestroyItem(GameObject prefab, Transform[] positions) {
+        private IEnumerator MoveAndDestroyItem(GameObject prefab, Transform[] positions, int health) {
             // 首先，在初始位置实例化物品
-            GameObject item = SpawnPrefab(prefab, positions[0]);
-
+            item = SpawnPrefab(prefab, positions[0]);
+            Animator itemAnimator = item.GetComponent<Animator>();
             // 遍历所有位置
             for (int i = 1; i < positions.Length; i++) 
             {
+                currentTargetPosition = positions[i].position;
                 Vector3 startPosition = item.transform.position;
                 Vector3 endPosition = positions[i].position;
+                itemAnimator.SetInteger("massageGreenChange", health);
+                health--;
+
+                // 检查动画状态并在适当时销毁物品
+                if (health <= 0) {
+                    // 等待消失动画完成
+                    yield return new WaitForSeconds(0.5f);
+                    Destroy(item);
+                    break;
+                }
+                yield return new WaitForSeconds(GenerateInterval);
                 float elapsedTime = 0;
 
                 while (elapsedTime < moveDuration) 
