@@ -50,6 +50,7 @@ namespace Script.StageSystem
         {
             // await DOTween.To(value => { emojis.transform.localPosition = new Vector3(value, value, 0); },
             //     -3100, 0, 0.8f).SetEase(Ease.InQuad);
+            stageController.gameOverStage.RemoveInstantiateGo();
             emojis.transform.localPosition = new Vector3(-3100, 3100, 0);
             enterGameGo.transform.localPosition = new Vector3(-720, -600, 0);
             await transform.DOLocalMove(new Vector3(0, 0, 0), 0.2f).ToUniTask();

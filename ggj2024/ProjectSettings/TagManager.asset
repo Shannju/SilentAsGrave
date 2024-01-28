@@ -7,7 +7,6 @@ TagManager:
   - Player1
   - Player2
   - Supply
-  - MessageBox
   layers:
   - Default
   - TransparentFX
