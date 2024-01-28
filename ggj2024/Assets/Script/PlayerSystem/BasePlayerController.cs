@@ -24,7 +24,7 @@ public abstract class BasePlayerController : MonoBehaviour
     public float inertia = 0.7f; // 可调整的惯性系数
     public int direction = 1;
 
-    public float slapRange = 1f;
+    public float slapRange = 10f;
     public float slapForce = 5f;
     protected LayerMask slapLayerMask; // LayerMask用于识别其他玩家
     protected Vector2 lastMoveDirection; // 存储上一次的移动方向
@@ -85,7 +85,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected void Start()
     {
-        SetWeapon(BeanType.NormalBean);
+        SetWeapon(BeanType.BadWordBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
         // playerHandRenderer.color = new Color(1, 1, 1, 1);
@@ -106,13 +106,16 @@ public abstract class BasePlayerController : MonoBehaviour
     protected async void Slap() // 拍打技能
     {
         // 检测前方180°范围内的物体
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slapRange, slapLayerMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slapRange);
         Debug.Log($"{gameObject.name} use Slap.");
         foreach (var go in hits)
         {
+           if (go.tag == "MessageBox")
+            {
+
+            }
             Debug.Log(go.name);
         }
-        /*       Debug.Log("dir  " + currentDirection.x);*/
 
         // 判断inputVector的方向
         if (currentDirection.x < 0)
