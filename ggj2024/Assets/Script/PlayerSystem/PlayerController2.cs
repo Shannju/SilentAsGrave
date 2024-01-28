@@ -52,7 +52,7 @@ public class PlayerController2 : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            currentBean.UseWeapon();
+            currentBean.UseWeapon(currentDirection);
             skillCooldown = GameConfig.SkillCooldown;
         }
     }

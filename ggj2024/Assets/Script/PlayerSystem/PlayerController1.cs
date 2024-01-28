@@ -7,7 +7,8 @@ public class PlayerController1 : BasePlayerController
     private Rigidbody2D rb; // 计算力的向量中间值
     protected void Start()
     {
-        SetWeapon(BeanType.NormalBean);
+        /*SetWeapon(BeanType.NormalBean);*/
+        SetWeapon(BeanType.LoveBean);
         originalMoveSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -52,7 +53,7 @@ public class PlayerController1 : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            currentBean.UseWeapon();
+            currentBean.UseWeapon(currentDirection);
             skillCooldown = GameConfig.SkillCooldown;
         }
     }

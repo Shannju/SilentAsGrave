@@ -52,7 +52,7 @@ public class PlayerController3 : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
-            currentBean.UseWeapon();
+            currentBean.UseWeapon(currentDirection);
             skillCooldown = GameConfig.SkillCooldown;
         }
     }

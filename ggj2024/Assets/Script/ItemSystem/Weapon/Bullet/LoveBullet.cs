@@ -16,31 +16,31 @@ namespace Script.ItemSystem.Bullet
 
         private void Move()
         {
-            transform.position += bulletVector * GameConfig.LoveBulletSpeed * Time.deltaTime;
+            // 用 Vector3 来移动，确保 z 分量为 0
+            transform.position += bulletVector * GameConfig.BadWordBulletSpeed * Time.deltaTime;
         }
 
         private void IncreaseLifeTime()
         {
             lifeTime += Time.deltaTime;
-            if (lifeTime >= GameConfig.LoveBulletLifeTime)
+            if (lifeTime >= GameConfig.BadWordBulletLifeTime)
             {
-                Destroy(this);
+                Destroy(gameObject); // 销毁整个子弹对象
             }
         }
 
-        public void SetVector(Vector3 vector)
+        public void SetVector(Vector2 vector)
         {
-            bulletVector = vector;
+            bulletVector = new Vector3(vector.x, vector.y, 0); // 将 Vector2 转换为 Vector3
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (!other.gameObject.CompareTag(gameObject.tag) &&
-                (other.gameObject.CompareTag($"Player1") || other.gameObject.CompareTag($"Player2")))
+            if (other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2"))
             {
                 BasePlayerController playerController = other.gameObject.GetComponent<BasePlayerController>();
-                Debug.Log($"{other.gameObject.name} Be love attacked.");
-                Destroy(this);
+                playerController.SetSpiritExceptionState();
+                Destroy(gameObject); // 在碰撞时销毁子弹
             }
         }
     }

@@ -9,11 +9,13 @@ namespace Script.ItemSystem.Weapon
         [SerializeField] private BadWordBullet bulletPrefab;
         [SerializeField] private GameObject bulletStartPoint;
         [SerializeField] private Animator animator;
-        
-        public void UseWeapon()
+        public void UseWeapon(Vector2 currentDirection)
         {
-            var go = Instantiate(bulletPrefab);
-            go.SetVector((bulletStartPoint.transform.position - transform.position).normalized);
+            // 实例化子弹并设置其位置
+            BadWordBullet bullet = Instantiate(bulletPrefab, bulletStartPoint.transform.position, Quaternion.identity);
+
+            // 使用 currentDirection 作为发射方向
+            bullet.SetVector(currentDirection.normalized);
         }
 
         public void RemoveBean()

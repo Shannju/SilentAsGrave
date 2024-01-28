@@ -8,7 +8,7 @@ using UnityEngine;
 
 public abstract class BasePlayerController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer playerHandRenderer;
+    [SerializeField] private GameObject playerHand;
 
     public bool acceptMoveInput = true;
     public float moveSpeed = 5f;
@@ -51,6 +51,8 @@ public abstract class BasePlayerController : MonoBehaviour
     private float slowTimeDuration = 0f;
     private bool loveState = false;
     private float loveTimeDuration = 0f;
+
+    protected Vector2 currentDirection = Vector2.zero;
 
     # endregion
 
@@ -104,6 +106,7 @@ public abstract class BasePlayerController : MonoBehaviour
                 slowState = false;
                 slowTimeDuration = 0f;
                 Debug.Log($"Player exit slow state.");
+
             }
         }
 
@@ -139,7 +142,6 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected async void Slap() // 拍打技能
     {
-        playerHandRenderer.transform.rotation = Quaternion.LookRotation(inputVector);
         // 检测前方180°范围内的物体
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slapRange, slapLayerMask);
         Debug.Log($"{gameObject.name} use Slap.");
@@ -147,22 +149,48 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             Debug.Log(go.name);
         }
+ /*       Debug.Log("dir  " + currentDirection.x);*/
 
+        // 判断inputVector的方向
+        if (currentDirection.x < 0)
+        {
+            // 如果inputVector向左
+            playerHand.GetComponent<HandController>().PlayLeft();
+        }
+        else if (currentDirection.x > 0)
+        {
+            // 如果inputVector向右
+            playerHand.GetComponent<HandController>().PlayRight();
+        }
+        else
+        {
+            if (UnityEngine.Random.Range(0, 2) == 0)
+            {
+                playerHand.GetComponent<HandController>().PlayLeft();
+                Debug.LogWarning("Randomly selected PlayLeft");
+            }
+            else
+            {
+                playerHand.GetComponent<HandController>().PlayRight();
+                Debug.LogWarning("Randomly selected PlayRight");
+            }
+        }
 
-        // 使用 DOTween 改变颜色
-        await DOTween.To(() => playerHandRenderer.color, x => playerHandRenderer.color = x, new Color(1, 1, 1, 1), 0.2f).SetEase(Ease.InCirc);
+        /*
+                // 使用 DOTween 改变颜色
+                await DOTween.To(() => playerHandRenderer.color, x => playerHandRenderer.color = x, new Color(1, 1, 1, 1), 0.2f).SetEase(Ease.InCirc);
 
-        // 计算移动的目标位置
-        Vector3 targetPosition = playerHandRenderer.gameObject.transform.localPosition + new Vector3(inputVector.x, inputVector.y, 0) * 0.1f;
+                // 计算移动的目标位置
+                Vector3 targetPosition = playerHandRenderer.gameObject.transform.localPosition + new Vector3(inputVector.x, inputVector.y, 0) * 0.1f;
 
-        // 使用 DOTween 移动手掌
-        await DOTween.To(() => playerHandRenderer.gameObject.transform.localPosition, x => playerHandRenderer.gameObject.transform.localPosition = x, targetPosition, 0.2f).SetEase(Ease.OutCirc);
+                // 使用 DOTween 移动手掌
+                await DOTween.To(() => playerHandRenderer.gameObject.transform.localPosition, x => playerHandRenderer.gameObject.transform.localPosition = x, targetPosition, 0.2f).SetEase(Ease.OutCirc);
 
-        await UniTask.Delay(TimeSpan.FromSeconds(1d));
+                await UniTask.Delay(TimeSpan.FromSeconds(1d));
 
-        // 重置 playerHand 位置和颜色
-        playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-        playerHandRenderer.color = new Color(1, 1, 1, 0);
+                // 重置 playerHand 位置和颜色
+                playerHandRenderer.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+                playerHandRenderer.color = new Color(1, 1, 1, 0);*/
     }
 
     protected void UpdateDirectionIndicator()
@@ -180,6 +208,10 @@ public abstract class BasePlayerController : MonoBehaviour
 
             // 围绕玩家椭圆
             directionIndicator.transform.position = new Vector3(xPosition, yPosition, 0f);
+            // 更新当前方向
+            Vector3 dir = directionIndicator.transform.up; // 对于 2D，transform.right 表示 GameObject 的局部右方向
+            currentDirection = new Vector2(dir.x, dir.y).normalized;
+
         }
     }
 

@@ -9,7 +9,7 @@ namespace Script.ItemSystem.Weapon
         [SerializeField] private Sweat sweatPrefab;
         [SerializeField] private Animator animator;
 
-        public void UseWeapon()
+        public void UseWeapon(Vector2 currentDirection)
         {
             var sweat = Instantiate(sweatPrefab);
             sweat.transform.position = gameObject.transform.position;
