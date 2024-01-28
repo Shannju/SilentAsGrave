@@ -25,6 +25,7 @@ public abstract class BasePlayerController : MonoBehaviour
     protected Vector2 targetVelocity;
     public float inertia = 0.7f; // 可调整的惯性系数
     public int direction = 1;
+    public float slapRange = 5f;
 
     public float slapForce = 5f;
     protected LayerMask slapLayerMask; // LayerMask用于识别其他玩家
@@ -71,8 +72,10 @@ public abstract class BasePlayerController : MonoBehaviour
     protected IWeapon currentBean;
 
     #endregion
-    protected abstract void Die();
 
+    public virtual void Die(){
+
+    }
     protected abstract void MovePlayer();
     protected abstract void UseSlap();
     protected abstract void UseSkill();

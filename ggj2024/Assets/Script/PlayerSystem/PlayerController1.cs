@@ -73,7 +73,7 @@ public class PlayerController1 : BasePlayerController
         } // 当按下J键时返回true
     }
 
-    protected override void Die()
+    public override void Die()
     {
         SetWeapon(BeanType.DeadBean);
         EventManager.SendMessage(GameEventType.Player1Dead);

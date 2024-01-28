@@ -50,6 +50,7 @@ namespace Script.DialogueSystem
         private bool KeyDown2 = false;
         private bool KeyDown3 = false;
         private bool KeyDown4 = false;
+        private bool isSpawning = false;
         private Vector3 currentTargetPosition;
         private GameObject item;
         private bool started = false;
@@ -82,6 +83,10 @@ namespace Script.DialogueSystem
         
         void Update()
         {
+            if (started && !isSpawning) {
+                StartCoroutine(SpawnRandomPrefabAfterRandomInterval());
+                isSpawning = true; // 确保协程只启动一次
+            }
             if (Input.GetKeyUp(KeyCode.Alpha0))
             {
                 started = false;
@@ -153,6 +158,38 @@ namespace Script.DialogueSystem
             GameObject spawnedPrefab = Instantiate(prefabToSpawn, spawnPosition);
             return spawnedPrefab;
         }
+
+        private IEnumerator SpawnRandomPrefabAfterRandomInterval() 
+        {
+            while (started) {
+                float randomInterval = Random.Range(5f, 20f);
+                yield return new WaitForSeconds(randomInterval);
+
+                int prefabIndex = Random.Range(0, 4);
+                GameObject selectedPrefab = null;
+                switch (prefabIndex) {
+                    case 0:
+                        selectedPrefab = WxMessageBoxPrefab;
+                        break;
+                    case 1:
+                        selectedPrefab = WxMessageBoxPrefabShort;
+                        break;
+                    case 2:
+                        selectedPrefab = WxWhiteBoxPrefab;
+                        break;
+                    case 3:
+                        selectedPrefab = WxWhiteBoxPrefabShort;
+                        break;
+                }
+
+                if (selectedPrefab != null) {
+                    // 这里需要确定预制体的生成位置，这里假设为spTrans01L，您可以根据需要调整
+                    SpawnPrefab(selectedPrefab, spTrans01L);
+                }
+            }
+        }
+
+
         private IEnumerator MoveAndDestroyItem(GameObject prefab, Transform[] positions, int health) {
             // 首先，在初始位置实例化物品
             item = SpawnPrefab(prefab, positions[0]);

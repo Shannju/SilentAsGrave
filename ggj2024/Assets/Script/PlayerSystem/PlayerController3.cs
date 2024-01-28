@@ -71,7 +71,7 @@ public class PlayerController3 : BasePlayerController
             slapCooldown = GameConfig.SlapCooldown;
         }
     }
-        protected override void Die()
+        public override void Die()
         {
             SetWeapon(BeanType.DeadBean);
             EventManager.SendMessage(GameEventType.Player3Dead);
