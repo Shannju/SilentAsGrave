@@ -82,6 +82,14 @@ namespace Script.DialogueSystem
         
         void Update()
         {
+            if (Input.GetKeyUp(KeyCode.Alpha0))
+            {
+                started = false;
+            }
+            else if (Input.GetKeyUp(KeyCode.Alpha9))
+            {
+                started = true;
+            }
             if (started)
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1) && !KeyDown1)// GREEN LONG
@@ -130,10 +138,12 @@ namespace Script.DialogueSystem
 
                 if (item != null && currentTargetPosition != Vector3.zero) {
                 // 计算并应用力
+                /*
                 Vector3 direction = currentTargetPosition - item.transform.position;
                 float distance = direction.magnitude;
                 Vector3 force = 5 * direction.normalized * Mathf.Min(1 / Mathf.Max(distance, 0.1f), maxForce);
                 item.transform.position += force * Time.deltaTime;
+                */
                 }
             }
         }
