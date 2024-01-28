@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class StageController : MonoBehaviour
 {
-    [SerializeField] private HeadingStage headingStage;
-    [SerializeField] private GameplayStage gameplayStage;
-    [SerializeField] private GameOverStage gameOverStage;
+    [SerializeField] public HeadingStage headingStage;
+    [SerializeField] public GameplayStage gameplayStage;
+    [SerializeField] public GameOverStage gameOverStage;
     [SerializeField] private Image sweatyBean;
     private IStage currentStage;
     private Tweener rotationTweener;

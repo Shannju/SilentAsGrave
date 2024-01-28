@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Script.StageSystem;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +9,9 @@ using UnityEngine.UI;
 public class GameOverStage : MonoBehaviour, IStage
 {
     [SerializeField] private StageController stageController;
-    [SerializeField] private Image background;
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private GameObject endGameGo;
     [SerializeField] public Button exitGameOverBtn;
+    private GameObject instantiateGo;
 
     private void Awake()
     {
@@ -30,17 +31,18 @@ public class GameOverStage : MonoBehaviour, IStage
     public async UniTask EnterStage()
     {
         exitGameOverBtn.gameObject.SetActive(true);
-        await DOTween.To(value => { background.transform.localPosition = new Vector3(value, 0, 0); },
-                -1920, 0, 0.8f)
-            .SetEase(Ease.InBounce)
-            .ToUniTask();
+        instantiateGo = Instantiate(endGameGo);
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
         stageController.ScrollQuartSweatyBean();
-        DOTween.To(value => { text.color = new Color(1, 1, 1, 1); },
-            -1920, 0, 0.8f);
     }
 
     public async UniTask ExitStage()
     {
         exitGameOverBtn.gameObject.SetActive(false);
+    }
+
+    public void RemoveInstantiateGo()
+    {
+        Destroy(instantiateGo);
     }
 }
