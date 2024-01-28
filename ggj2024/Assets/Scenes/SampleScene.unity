@@ -2134,7 +2134,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1349368921}
-  - component: {fileID: 1349368920}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -2142,24 +2141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1349368920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1349368919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 656c3c9563da23841b060c5e8a8d3495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stayTimeText1: {fileID: 397652539}
-  stayTimeText2: {fileID: 1604380422}
-  stayTimeText3: {fileID: 330638148}
-  player1: {fileID: 1596302140}
-  player2: {fileID: 1738158174}
-  player3: {fileID: 2024834405}
 --- !u!4 &1349368921
 Transform:
   m_ObjectHideFlags: 0
@@ -2564,6 +2545,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1478324711}
   - component: {fileID: 1478324712}
+  - component: {fileID: 1478324713}
+  - component: {fileID: 1478324714}
   m_Layer: 0
   m_Name: background
   m_TagString: Untagged
@@ -2638,6 +2621,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &1478324713
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478324710}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 38.399998, y: 21.599998}
+    newSize: {x: 38.399998, y: 21.599998}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 15.513656, y: 9.766314}
+      - {x: 12.210609, y: 6.9863853}
+      - {x: 8.091824, y: 2.3589823}
+      - {x: 8.247072, y: 2.260295}
+      - {x: 8.40806, y: 1.8624923}
+      - {x: 8.232022, y: 1.3632908}
+      - {x: -2.8566542, y: -5.134582}
+      - {x: -4.2382655, y: -5.0965686}
+      - {x: -8.645184, y: -2.4891522}
+      - {x: -8.665078, y: -1.7596644}
+      - {x: -8.3094, y: -1.4147902}
+      - {x: 2.423955, y: 4.71063}
+      - {x: 3.1688309, y: 5.001898}
+      - {x: 4.1120033, y: 4.636787}
+      - {x: 8.101898, y: 2.3897362}
+      - {x: 14.661457, y: 9.761981}
+      - {x: 6.9238296, y: 10.853102}
+      - {x: -19.199999, y: 10.799999}
+      - {x: -19.199999, y: -10.799999}
+      - {x: 19.199999, y: -10.799999}
+      - {x: 19.199999, y: 10.799999}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1478324714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478324710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656c3c9563da23841b060c5e8a8d3495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stayTimeText1: {fileID: 397652539}
+  stayTimeText2: {fileID: 1604380422}
+  stayTimeText3: {fileID: 330638148}
+  player1: {fileID: 1596302140}
+  player2: {fileID: 1738158174}
+  player3: {fileID: 2024834405}
 --- !u!1 &1478488225
 GameObject:
   m_ObjectHideFlags: 0
